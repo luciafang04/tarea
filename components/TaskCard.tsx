@@ -1,12 +1,26 @@
 "use client";
-import { Task, Status } from "../types";
+import { Task } from "../types";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-type Props = {
-  task: Task;
-  onMoveTask: (id: string, status: Status) => void;
-};
+type Props = { task: Task };
 
-export default function TaskCard({ task, onMoveTask }: Props) {
+export default function TaskCard({ task }: Props) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: task.id,
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    border: "1px solid #ccc",
+    padding: 8,
+    marginBottom: 8,
+    borderRadius: 4,
+    backgroundColor: "white",
+    cursor: "grab",
+  };
+
   const color =
     task.priority === "low"
       ? "green"
@@ -15,15 +29,7 @@ export default function TaskCard({ task, onMoveTask }: Props) {
       : "red";
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: 8,
-        marginBottom: 8,
-        borderRadius: 4,
-        backgroundColor: "white",
-      }}
-    >
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <h3>{task.title}</h3>
         <span
@@ -37,65 +43,10 @@ export default function TaskCard({ task, onMoveTask }: Props) {
           {task.priority}
         </span>
       </div>
-
       {task.description && <p>{task.description}</p>}
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          fontSize: 12,
-          marginTop: 4,
-        }}
-      >
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12 }}>
         <span>Tags: {task.tags.join(", ")}</span>
         <span>Est: {task.estimationMin} min</span>
-      </div>
-
-      {/* ===== Botones para mover tarea entre columnas ===== */}
-      <div style={{ display: "flex", gap: 4, marginTop: 8 }}>
-        {task.status !== "todo" && (
-          <button
-            onClick={() => onMoveTask(task.id, "todo")}
-            style={{
-              fontSize: 10,
-              padding: "2px 4px",
-              borderRadius: 4,
-              backgroundColor: "#ddd",
-            }}
-          >
-            ← Todo
-          </button>
-        )}
-
-        {task.status !== "doing" && (
-          <button
-            onClick={() => onMoveTask(task.id, "doing")}
-            style={{
-              fontSize: 10,
-              padding: "2px 4px",
-              borderRadius: 4,
-              backgroundColor: "#90cdf4", // azul claro
-            }}
-          >
-            → Doing
-          </button>
-        )}
-
-        {task.status !== "done" && (
-          <button
-            onClick={() => onMoveTask(task.id, "done")}
-            style={{
-              fontSize: 10,
-              padding: "2px 4px",
-              borderRadius: 4,
-              backgroundColor: "#48bb78", // verde
-              color: "white",
-            }}
-          >
-            ✓ Done
-          </button>
-        )}
       </div>
     </div>
   );

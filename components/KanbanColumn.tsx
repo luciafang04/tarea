@@ -5,25 +5,31 @@ import TaskModal from "./TaskModal";
 import { Task, Status } from "../types";
 
 type Props = {
+  status: Status;
   title: string;
   tasks: Task[];
   onAddTask: (task: Task) => void;
-  onMoveTask: (id: string, status: Status) => void; // ✅ nuevo
 };
 
-export default function KanbanColumn({ title, tasks, onAddTask, onMoveTask }: Props) {
+export default function KanbanColumn({ status, title, tasks, onAddTask }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div style={{ width: "33%", padding: 8, backgroundColor: "#eee", borderRadius: 4 }}>
+    <div
+      data-status={status} // <--- muy importante para drag&drop
+      style={{
+        width: "33%",
+        padding: 8,
+        backgroundColor: "#eee",
+        borderRadius: 4,
+        minHeight: "80vh",
+      }}
+    >
       <h2>{title}</h2>
-
       <button onClick={() => setModalOpen(true)}>+ Nueva Tarea</button>
-
       {modalOpen && <TaskModal onSubmit={onAddTask} onClose={() => setModalOpen(false)} />}
-
       {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} onMoveTask={onMoveTask} /> // ✅ pasamos onMoveTask
+        <TaskCard key={task.id} task={task} />
       ))}
     </div>
   );
