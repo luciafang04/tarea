@@ -2,19 +2,29 @@
 import { useState } from "react";
 import TaskCard from "./TaskCard";
 import TaskModal from "./TaskModal";
-import { Task } from "../types";
+import { Task, Status } from "../types";
 
-type Props = { title: string; tasks: Task[]; onAddTask: (task: Task) => void };
+type Props = {
+  title: string;
+  tasks: Task[];
+  onAddTask: (task: Task) => void;
+  onMoveTask: (id: string, status: Status) => void; // ✅ nuevo
+};
 
-export default function KanbanColumn({ title, tasks, onAddTask }: Props) {
+export default function KanbanColumn({ title, tasks, onAddTask, onMoveTask }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div style={{ width: "33%", padding: 8, backgroundColor: "#eee", borderRadius: 4 }}>
       <h2>{title}</h2>
+
       <button onClick={() => setModalOpen(true)}>+ Nueva Tarea</button>
+
       {modalOpen && <TaskModal onSubmit={onAddTask} onClose={() => setModalOpen(false)} />}
-      {tasks.map((task) => <TaskCard key={task.id} task={task} />)}
+
+      {tasks.map((task) => (
+        <TaskCard key={task.id} task={task} onMoveTask={onMoveTask} /> // ✅ pasamos onMoveTask
+      ))}
     </div>
   );
 }
