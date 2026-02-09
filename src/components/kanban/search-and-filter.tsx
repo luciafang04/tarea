@@ -47,6 +47,13 @@ export function SearchAndFilter({ query, onChange }: SearchAndFilterProps) {
                   Ahí verás los campos para poner puntuaciones, comentarios y
                   observaciones del profe.
                 </p>
+                <div className="pt-2">
+                  <p className="font-semibold">Cards</p>
+                  <p>
+                    Al crear una card nueva, refresca la página para que se
+                    visualice.
+                  </p>
+                </div>
               </div>
             </PopoverContent>
           </Popover>
