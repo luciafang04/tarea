@@ -72,7 +72,7 @@ export function TaskCard({ task, godMode }: TaskCardProps) {
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <h3
-              className="text-sm font-semibold"
+              className="text-sm font-semibold cursor-grab select-none active:cursor-grabbing"
               {...attributes}
               {...listeners}
             >

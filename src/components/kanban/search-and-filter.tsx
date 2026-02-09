@@ -1,12 +1,11 @@
 "use client"
 
-import { InfoIcon, SearchIcon } from "lucide-react"
+import { SearchIcon } from "lucide-react"
 
 import { parseQuery } from "@/lib/query"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"
 
 type SearchAndFilterProps = {
@@ -18,10 +17,10 @@ export function SearchAndFilter({ query, onChange }: SearchAndFilterProps) {
   const parsed = parseQuery(query)
 
   return (
-    <div className="rounded-xl border bg-background p-4 shadow-sm">
+    <div className="rounded-xl border bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between gap-4">
         <div className="flex flex-1 items-center gap-2">
-          <div className="flex items-center gap-2 rounded-md border px-3 py-2">
+          <div className="flex items-center gap-2 rounded-md border bg-white px-3 py-2">
             <SearchIcon className="size-4 text-muted-foreground" />
             <Input
               value={query}
@@ -31,36 +30,23 @@ export function SearchAndFilter({ query, onChange }: SearchAndFilterProps) {
               aria-label="Buscar tareas"
             />
           </div>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button size="icon-sm" variant="ghost" aria-label="Ejemplos de búsqueda">
-                  <InfoIcon className="size-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="right">
-                <p className="font-semibold">Ejemplos rápidos</p>
-                <ul className="mt-2 space-y-1 text-xs">
-                  <li>`tag:riesgo p:high`</li>
-                  <li>`due:overdue est:&lt;60`</li>
-                  <li>`broker reporte`</li>
-                </ul>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" size="sm">
-                Guía de operadores
+              <Button variant="outline" size="sm" className="bg-white">
+                Recordatorio
               </Button>
             </PopoverTrigger>
             <PopoverContent>
               <div className="space-y-2 text-sm">
-                <p className="font-semibold">Operadores soportados</p>
-                <p>`tag:react` busca por tags</p>
-                <p>`p:high` prioridad</p>
-                <p>`due:overdue` o `due:week`</p>
-                <p>`est:&lt;60` o `est:&gt;=120`</p>
+                <p className="font-semibold">Modo Dios</p>
+                <p>
+                  Al activar el Modo Dios con el switch de arriba, puedes
+                  evaluar cada card entrando a "Editar".
+                </p>
+                <p>
+                  Ahí verás los campos para poner puntuaciones, comentarios y
+                  observaciones del profe.
+                </p>
               </div>
             </PopoverContent>
           </Popover>

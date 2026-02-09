@@ -50,7 +50,7 @@ export function DataManagement() {
   }
 
   return (
-    <div className="rounded-xl border bg-background p-6 shadow-sm">
+    <div className="rounded-xl border bg-white p-6 shadow-sm">
       <h2 className="text-lg font-semibold">Persistencia y exportación</h2>
       <p className="text-sm text-muted-foreground">
         Exporta el tablero y el log de auditoría o importa un JSON validado.

@@ -68,7 +68,7 @@ export function AuditHistory({ audit, tasks }: AuditHistoryProps) {
   }
 
   return (
-    <div className="rounded-xl border bg-background p-6 shadow-sm">
+    <div className="rounded-xl border bg-white p-6 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold">Log de auditoría</h2>

@@ -28,7 +28,7 @@ import { Card } from "@/components/ui/card"
 import { Toaster } from "@/components/ui/sonner"
 
 const COLUMNS: Array<{ id: Estado; title: string; description: string }> = [
-  { id: "todo", title: "Todo", description: "Pendiente" },
+  { id: "todo", title: "To do", description: "Pendiente" },
   { id: "doing", title: "Doing", description: "En progreso" },
   { id: "done", title: "Done", description: "Finalizado" },
 ]
@@ -121,7 +121,7 @@ export function KanbanBoard() {
             <p className="text-xs font-medium uppercase text-muted-foreground">
               Modo Dios
             </p>
-            <p className="text-sm font-semibold">Evaluacion de Javi</p>
+            <p className="text-sm font-semibold">Evaluación de Javi</p>
           </div>
           <Switch
             checked={state.godMode}
